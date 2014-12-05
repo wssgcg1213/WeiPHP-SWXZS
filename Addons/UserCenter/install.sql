@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS `wp_usercenter` (
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`user_pwd`  varchar(255) NOT NULL  COMMENT '用户密码',
+`openid`  varchar(255) NOT NULL  COMMENT 'OPENID',
+`school_id`  int(15) NOT NULL  COMMENT '学号或者工号',
+`token`  varchar(255) NOT NULL  COMMENT 'Token',
+`user_type`  tinyint(2) NOT NULL  DEFAULT 0 COMMENT '用户类型(老师或同学)',
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0;
+INSERT INTO `wp_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`) VALUES ('usercenter','生物小帮手绑定用户中心','0','','1','{"1":["user_type","school_id","user_pwd"]}','1:基础','','','','','','10','school_id','','1396061373','1417705725','1','MyISAM');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('user_pwd','用户密码','varchar(255) NOT NULL','string','','密码','1','','0','1','1','1417704434','1417704434','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('openid','OPENID','varchar(255) NOT NULL','string','','OPENID','0','','0','1','1','1417701724','1417701724','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('school_id','学号或者工号','int(15) NOT NULL','num','','学号或者工号','1','','0','1','1','1417701832','1417701832','','3','','regex','','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','Token','varchar(255) NOT NULL','string','','','0','','0','1','1','1417705657','1417705657','','3','','regex','get_token','3','function');
+INSERT INTO `wp_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('user_type','用户类型(老师或同学)','tinyint(2) NOT NULL','select','0','','1','0:同学\r\n1:老师','0','1','1','1417701636','1417701630','','3','','regex','','3','function');
+UPDATE `wp_attribute` SET model_id= (SELECT MAX(id) FROM `wp_model`) WHERE model_id=0;
