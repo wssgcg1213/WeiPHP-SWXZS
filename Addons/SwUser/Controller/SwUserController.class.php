@@ -59,9 +59,9 @@ class SwUserController extends AddonsController{
             $map['user_state'] = 1;
             $_model->where($params)->save($map);
             $url = addons_url( 'SwUser://SwUser/center' );
-            return $this->error( '您已经成功绑定! 现在跳转到用户中心.' , $url, 3);
+            return $this->success( '绑定成功! 现在跳转到用户中心.' , $url, 3);
         }else{
-            $this->error ( ' 绑定失败, 请检查输入或者联系客服处理. ' );
+            $this->error ( ' 验证失败, 请检查您输入信息的正误, 或联系客服处理. ' );
         }
 
     }

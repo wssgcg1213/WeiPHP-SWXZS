@@ -13,11 +13,13 @@ class WeixinAddonModel extends WeixinModel{
         $param ['token'] = get_token ();
         $param ['openid'] = get_openid ();
         $user = M('swuser')->where($params)->find();
-        $url = addons_url ( 'SwUser://SwUser/addBind', $param );
+
         if($user['user_state']){
-            $replyText = json_encode($user)."<a href='$url'>$url</a>binded";
+            $url = addons_url ( 'SwUser://SwUser/center', $param );
+            $replyText = "$user['real_name'], 你已经绑定过了哦! <a href='$url'>点击进入</a>用户中心.";
         }else{
-            $replyText = json_encode($user)."<a href='$url'>$url</a>Unbind";
+            $url = addons_url ( 'SwUser://SwUser/addBind', $param );
+            $replyText = "你还没有绑定校园账号噢, 为了方便使用大部分功能, 请先<a href='$url'>点我绑定</a>.";
         }
         $this->replyText($replyText);
 	} 
