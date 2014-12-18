@@ -75,12 +75,12 @@ class SwUserController extends AddonsController{
         $user = M('swuser')->where($params)->find();
         if($user['user_state'] == 0){
             $url = addons_url( 'SwUser://SwUser/addBind' );
-            return $this->error ( ' 未绑定, 请先绑定账号! ', $url, 3);
+            return $this->error ( ' 未绑定, 请先绑定账号! ', $url, 2);
         }
 
         $this->assign('user', $user);
 
-        $this->display();
+        $this->display('center');
     }
 
 }
