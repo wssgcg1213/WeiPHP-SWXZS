@@ -48,20 +48,23 @@ class SwUserController extends AddonsController{
 
         $params['user_type'] = I('post.utype') ? 1 : 0;
         $params['school_id'] = I('post.sid');
-        $params['user_birth'] = I('post.pwd');
+        $userPwd = I('post.pwd');
 
         $_model = M( 'swuser' );
         $user = $_model->where($params)->find();
-        if($user){
+        if($user['user_birth'] == $userPwd){
             $map = $params;
+            $map['user_']
             $map['token'] = $token;
             $map['openid'] = $openid;
             $map['user_state'] = 1;
             $_model->where($params)->save($map);
             $url = addons_url( 'SwUser://SwUser/center' );
             return $this->error( '您已经成功绑定! 现在跳转到用户中心.' , $url, 3);
+        }else{
+            $this->error ( ' 绑定失败, 请检查输入或者联系客服处理. ' );
         }
-        $this->error ( ' 绑定失败, 请检查输入或者联系客服处理. ' );
+
     }
 
     /**
@@ -72,8 +75,8 @@ class SwUserController extends AddonsController{
         $params['openid'] = get_openid();
         $user = M('swuser')->where($params)->find();
         if($user['user_state'] == 0){
-            $url = $url = addons_url( 'SwUser://SwUser/addBind' );
-            return $this->error ( ' 未绑定, 请先绑定账号! ' );
+            $url = addons_url( 'SwUser://SwUser/addBind' );
+            return $this->error ( ' 未绑定, 请先绑定账号! ', $url, 3);
         }
 
         $this->assign('user', $user);
