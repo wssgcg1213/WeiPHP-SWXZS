@@ -11,7 +11,7 @@ use Common\Controller\Addon;
  */
 class UserCenterAddon extends Addon {
 	public $info = array (
-			'name' => 'UserCenter',
+			'name' => 'SwUser',
 			'title' => '微信用户中心',
 			'description' => '实现微信用户绑定，微信用户信息初始化等基本功能',
 			'status' => 1,
@@ -21,7 +21,7 @@ class UserCenterAddon extends Addon {
 	public $admin_list = array ();
 
 	public function install() {
-		$install_sql = './Addons/UserCenter/install.sql';
+		$install_sql = './Addons/SwUser/install.sql';
 		if (file_exists ( $install_sql )) {
 			execute_sql_file ( $install_sql );
 		}
@@ -29,7 +29,7 @@ class UserCenterAddon extends Addon {
 	}
 
 	public function uninstall() {
-		$uninstall_sql = './Addons/UserCenter/uninstall.sql';
+		$uninstall_sql = './Addons/SwUser/uninstall.sql';
 		if (file_exists ( $uninstall_sql )) {
 			execute_sql_file ( $uninstall_sql );
 		}

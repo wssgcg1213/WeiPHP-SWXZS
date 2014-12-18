@@ -44,7 +44,7 @@ class UserCenterController extends AddonsController {
 				//lastsql();exit;
 				$url = '';				
 				$bind_backurl = cookie('__forward__');
-				$config = getAddonConfig ( 'UserCenter' );
+				$config = getAddonConfig ( 'SwUser' );
 				$jumpurl = $config['jumpurl'];
 				
 				if(!empty($bind_backurl)){

@@ -16,7 +16,7 @@ class WeixinAddonModel extends WeixinModel {
 		// 其中token和openid这两个参数一定要传，否则程序不知道是哪个微信用户进入了系统
 		$param ['token'] = get_token ();
 		$param ['openid'] = get_openid ();
-		$url = addons_url ( 'UserCenter://UserCenter/addBind', $param );
+		$url = addons_url ( 'SwUser://SwUser/addBind', $param );
 
 		$articles [0] = array (
 				'Title' => $map ['token'],

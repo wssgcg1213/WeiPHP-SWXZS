@@ -20,7 +20,7 @@ class WeixinAddonModel extends WeixinModel {
 		$param ['openid'] = get_openid ();
 		
 		$sreach = array('[follow]', '[website]');
-		$replace = array(addons_url('UserCenter://UserCenter/edit', $param), addons_url('WeiSite://WeiSite/index', $param));
+		$replace = array(addons_url('SwUser://SwUser/edit', $param), addons_url('WeiSite://WeiSite/index', $param));
 		$config ['description'] = str_replace($sreach, $replace, $config ['description'] );
 		
 		switch ($config ['type']) {

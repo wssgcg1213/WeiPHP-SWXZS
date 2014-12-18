@@ -5,7 +5,7 @@ use Home\Controller\AddonsController;
 
 class SwUserController extends AddonsController{
     /**
-     * 显示微信用户列表数据
+     * 后台显示微信用户列表数据
      */
     public function lists() {
         $this->assign ( 'add_button', true );
@@ -16,4 +16,29 @@ class SwUserController extends AddonsController{
 
         parent::common_lists ( $model );
     }
+
+    /**
+     * display 增加绑定页面
+     */
+    public function addBind(){
+
+        $this->display( 'add_userinfo' );
+
+    }
+
+    /**
+     * POST 接收绑定验证并跳转
+     */
+    public function postBind(){
+
+    }
+
+    /**
+     * display 用户状态页面
+     */
+    public function center(){
+
+    }
+
 }
+
