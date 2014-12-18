@@ -14,7 +14,7 @@ class WeixinAddonModel extends WeixinModel{
         $param ['openid'] = get_openid ();
         $user = M('swuser')->where($params)->find();
         $url = addons_url ( 'SwUser://SwUser/addBind', $param );
-        if($user){
+        if($user['user_state']){
             $replyText = json_encode($user)."<a href='$url'>$url</a>binded";
         }else{
             $replyText = json_encode($user)."<a href='$url'>$url</a>Unbind";
