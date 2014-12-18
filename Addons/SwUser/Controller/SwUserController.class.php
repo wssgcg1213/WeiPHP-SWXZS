@@ -22,7 +22,7 @@ class SwUserController extends AddonsController{
      */
     public function addBind(){
 
-        $this->display( 'add_userinfo' );
+        $this->display( 'addBind' );
 
     }
 
