@@ -78,9 +78,34 @@ class SwUserController extends AddonsController{
             return $this->error ( ' 未绑定, 请先绑定账号! ', $url, 2);
         }
 
+        $url['unbind'] = addons_url('SwUser://SwUser/unBind');
+        $this->assign('url', $url);
         $this->assign('user', $user);
 
         $this->display('center');
+    }
+
+    /**
+     * 解除绑定
+     */
+    public function unBind(){
+        $map['token'] = get_token();
+        $map['openid'] = get_openid();
+        if(!$map['token'] || !$map['openid']){
+            $this->error ( ' 非法操作！');
+        }
+        $_model = M('swuser');
+        $user = $_model->where($map)->find();
+        if($user){
+            $unbind = $user;
+            $unbind['token'] = NULL;
+            $unbind['openid'] = NULL;
+            $unbind['user_state'] = 0;
+            $_model->where($map)->save($unbind);
+            $this->success('解除绑定成功!');
+        }else{
+            $this->error ( ' 非法操作！');
+        }
     }
 
 }
