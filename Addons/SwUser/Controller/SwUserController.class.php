@@ -26,30 +26,57 @@ class SwUserController extends AddonsController{
         if(!$params['token'] || !$params['openid']){
             return $this->error ( '非法操作！');
         }
+
         $user = M( 'swuser' )->where($params)->find();
         if($user){
             $url = addons_url ( 'SwUser://SwUser/center' );
             return $this->error( '您已经绑定过了! 现在跳转到用户中心.' , $url, 3);
         }
-        $this->display( 'addBind' );
 
+        $this->display( 'addBind' );
     }
 
     /**
      * POST 接收绑定验证并跳转
      */
     public function postBind(){
-        $params['token'] = get_token();
-        $params['openid'] = get_openid();
-        if(!$params['token'] || !$params['openid']){
+        $token = get_token();
+        $openid = get_openid();
+        if(!$token || !$openid){
             $this->error ( ' 非法操作！');
         }
+
+        $params['user_type'] = I('post.utype') ? 1 : 0;
+        $params['school_id'] = I('post.sid');
+        $params['user_birth'] = I('post.pwd');
+
+        $_model = M( 'swuser' );
+        $user = $_model->where($params)->find();
+        if($user){
+            $map = $params;
+            $map['token'] = $token;
+            $map['openid'] = $openid;
+            $_model->where($params)->save($map);
+            $url = addons_url( 'SwUser://SwUser/center' );
+            return $this->error( '您已经成功绑定! 现在跳转到用户中心.' , $url, 3);
+        }
+        $this->error ( ' 绑定失败, 请检查输入或者联系客服处理. ' );
     }
 
     /**
      * display 用户状态页面
      */
     public function center(){
+        $params['token'] = get_token();
+        $params['openid'] = get_openid();
+        $user = M('swuser')->where($params)->find();
+        if(!$user){
+            $url = $url = addons_url( 'SwUser://SwUser/addBind' );
+            return $this->error ( ' 未绑定, 请先绑定账号! ' );
+        }
+
+        $this->assign('user', $user);
+
         $this->display();
     }
 
