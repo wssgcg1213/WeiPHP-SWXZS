@@ -27,7 +27,7 @@ function checkForm(){
 
 <body>
 <div class="Survey_cont">
-  <h2>请填写您的123</h2>
+  <h2>请填写您的个人信息以完成绑定</h2>
   <article class="clearfix">
     <form method="post" action="{:addons_url ( 'SwUser://SwUser/postBind' )}" onSubmit="return checkForm();">
       <div class="survey_box">
@@ -39,7 +39,7 @@ function checkForm(){
           <input type="radio" name="utype" value="0" checked>学生
           <input type="radio" name="utype" value="1">老师
         </div>
-        <div class="profile_list">身份证后六位:
+        <div class="profile_list">验证生日: (8位,例如19940308)
           <input class="text" id="pwd" name="pwd" />
         </div>
 

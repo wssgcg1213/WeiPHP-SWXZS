@@ -21,7 +21,16 @@ class SwUserController extends AddonsController{
      * display 增加绑定页面
      */
     public function addBind(){
-
+        $params['token'] = get_token();
+        $params['openid'] = get_openid();
+        if(!$params['token'] || !$params['openid']){
+            return $this->error ( '非法操作！');
+        }
+        $user = M( 'swuser' )->where($params)->find();
+        if($user){
+            $url = addons_url ( 'SwUser://SwUser/center' );
+            return $this->error( '您已经绑定过了! 现在跳转到用户中心.' , $url, 3);
+        }
         $this->display( 'addBind' );
 
     }
@@ -30,14 +39,18 @@ class SwUserController extends AddonsController{
      * POST 接收绑定验证并跳转
      */
     public function postBind(){
-
+        $params['token'] = get_token();
+        $params['openid'] = get_openid();
+        if(!$params['token'] || !$params['openid']){
+            $this->error ( ' 非法操作！');
+        }
     }
 
     /**
      * display 用户状态页面
      */
     public function center(){
-
+        $this->display();
     }
 
 }
