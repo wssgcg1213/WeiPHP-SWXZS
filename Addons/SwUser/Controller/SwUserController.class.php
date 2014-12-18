@@ -54,7 +54,6 @@ class SwUserController extends AddonsController{
         $user = $_model->where($params)->find();
         if($user['user_birth'] == $userPwd){
             $map = $params;
-            $map['user_']
             $map['token'] = $token;
             $map['openid'] = $openid;
             $map['user_state'] = 1;
