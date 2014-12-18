@@ -8,10 +8,10 @@ var_dump($user);
 	<div class="container">
     	<div class="box user_box">
         	<div class="head"><img src="{:ADDON_PUBLIC_PATH}/head.jpg"/></div>
-            <p><strong>刘备</strong></p>
-            <p><span>GID:</span> 123456</p>
-            <p><span>部门:</span> 军事主治</p>
-            <a class="edit" href="#" title="编辑"><img src="__IMG__/m/icon_pencil.png" width="30" width="30"/></a>
+            <p><strong>{$user["real_name"]}</strong></p>
+            <p><span>学/工号:</span>{$user['school_id']}</p>
+            <p><span>用户类型:</span><?php echo $user['user_type'] ? "教师" : "学生";?></p>
+            <a class="edit" href="##" title="编辑"><img src="__IMG__/m/icon_pencil.png" width="30" width="30"/></a>
         </div>
         <div class="box">
         	<h6>用户总积分:3000</h6>
