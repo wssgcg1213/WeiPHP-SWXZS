@@ -10,7 +10,16 @@ class WeixinAddonModel extends WeixinModel{
 	function reply($dataArr, $keywordArr = array()) {
 		$config = getAddonConfig ( 'SwUser' ); // 获取后台插件的配置参数	
 		//dump($config);
-
+        $param ['token'] = get_token ();
+        $param ['openid'] = get_openid ();
+        $user = M('swuser')->where($params)->find();
+        $url = addons_url ( 'SwUser://SwUser/addBind', $param );
+        if($user){
+            $replyText = json_encode($user)."<a href='$url'>URL</a>";
+        }else{
+            $replyText = json_encode($user)."<a href='$url'>URL</a>";
+        }
+        $this->replyText($replyText);
 	} 
 
 	// 关注公众号事件
