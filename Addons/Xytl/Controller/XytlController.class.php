@@ -18,6 +18,12 @@ class XytlController extends AddonsController{
      * center
      */
     public function center(){
+        $openid = get_openid();
+        $token = get_token();
+        if(!isBindSwUser($openid, $token)){
+            $url = addons_url('SwUser://SwUser/addBind');
+            return $this->error('请先绑定账户!', $url, 2);
+        }
         $_model = M('xytl');
         $data = $_model->order('od')->select();
         $res = array();

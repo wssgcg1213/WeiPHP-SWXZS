@@ -2309,3 +2309,19 @@ function short_url($long_url) {
 		return $long_url;
 	}
 }
+
+/**
+ * @Desc 生物小帮手 是否绑定账号
+ * @param $openid
+ * @param $token
+ * @return bool
+ */
+function isBindSwUser($openid, $token){
+    $map['openid'] = $openid;
+    $map['token'] = $token;
+    $user = M('swuser')->where($map)->find();
+    if($user['user_state']){
+        return true;
+    }
+    return false;
+}
