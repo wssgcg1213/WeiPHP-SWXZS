@@ -30,6 +30,6 @@ class XytlController extends AddonsController{
             }
         }
 
-        echo json_encode($types);
+        echo json_encode($data);
     }
 }
