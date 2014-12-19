@@ -3,9 +3,9 @@
 
 <body>
 	<div class="container">
-        <volist id="fitem" name="data">
+        <volist id="fitem" name="data" key="k">
             <div class="box">
-                <h6>{$fitem['type']}</h6>
+                <h6>{$k}</h6>
                 <volist id="item" name="fitem['field']">
                     <a class="item" href="##">
                         <span class="td title des">{$item['description']}</span>

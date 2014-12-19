@@ -20,7 +20,7 @@ class XytlController extends AddonsController{
     public function center(){
         $_model = M('xytl');
 
-        $data = M('xytl')->order('od DESC')->select();
+        $data = M('xytl')->order('od')->select();
         $res = array();
         foreach ($data as $v) {
             $res[$v['type']][] = $v;
