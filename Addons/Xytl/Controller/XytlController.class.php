@@ -19,22 +19,12 @@ class XytlController extends AddonsController{
      */
     public function center(){
         $_model = M('xytl');
-//        $types = $_model->field('type')->group('type')->select();
-//        $data = M('xytl')->order('order desc')->select();
-//        foreach($types as $k => $item){
-//            $types[$k]['field'] = array();
-//            foreach($data as $i){
-//                if($i['type'] == $item['type']){
-//                    array_push($types[$k]['field'], $i);
-//                }
-//            }
-//        }
+
         $data = M('xytl')->order('od DESC')->select();
         $res = array();
         foreach ($data as $v) {
             $res[$v['type']][] = $v;
         }
-        echo json_encode($data);
-//        echo json_encode($res);
+        echo json_encode($res);
     }
 }
