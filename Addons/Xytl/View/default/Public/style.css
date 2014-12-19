@@ -10,8 +10,8 @@ body{}
 .item{  border-bottom:1px solid #eee; padding:10px 0; float:left; width:100%}
 .item .td{ float:left; color:#666}
 .item .title{ width:50%}
-.item .count{ width:20%}
-.item .to{ width:30%; color:#090; text-align:right}
+.item .count{ margin-right: 20px}
+.item .to{ color:#090; text-align:right}
 .unbind{ padding:15px; margin-top:200px;}
 .unbind p{ margin:20px 0; text-align:center}
-.phone{float: left;}
+.fr{float: right}
