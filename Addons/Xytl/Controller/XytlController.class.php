@@ -19,12 +19,12 @@ class XytlController extends AddonsController{
      */
     public function center(){
         $_model = M('xytl');
-
-        $data = M('xytl')->order('od')->select();
+        $data = $_model->order('od')->select();
         $res = array();
         foreach ($data as $v) {
             $res[$v['type']][] = $v;
         }
-        echo json_encode($res);
+        $this->assign('data', $res);
+        $this->display('center');
     }
 }
