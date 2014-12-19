@@ -18,7 +18,11 @@ class XytlController extends AddonsController{
      * center
      */
     public function center(){
-        $data = M('xytl')->group('type')->select();
-        echo json_encode($data);
+        $_model = M('xytl');
+        $types = $_model->field('type')->group('type')->select();
+        echo json_encode($types);
+        $data = M('xytl')->order('order desc')->select();
+
+//        echo json_encode($data);
     }
 }
