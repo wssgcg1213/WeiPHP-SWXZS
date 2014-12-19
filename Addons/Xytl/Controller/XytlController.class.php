@@ -18,9 +18,9 @@ class XytlController extends AddonsController{
      * center
      */
     public function center(){
-        $_model = $this->getModel('xytl');
+        $_model = M('xytl');
 //        $types = $_model->field('type')->group('type')->select();
-        $data = $_model->order('order desc')->select();
+        $data = $_model->select();
 //        foreach($types as $k => $item){
 //            $types[$k]['field'] = array();
 //            foreach($data as $i){
