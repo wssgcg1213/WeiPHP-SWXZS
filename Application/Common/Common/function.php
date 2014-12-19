@@ -2317,11 +2317,12 @@ function short_url($long_url) {
  * @return bool
  */
 function isBindSwUser($openid, $token){
-    $map['openid'] = $openid;
-    $map['token'] = $token;
-    $user = M('swuser')->where($map)->find();
-    if($user['user_state']){
-        return true;
-    }
-    return false;
+//    $map['openid'] = $openid;
+//    $map['token'] = $token;
+//    $user = M('swuser')->where($map)->find();
+//    if($user['user_state']){
+//        return true;
+//    }
+//    return false;
+    return 1;
 }
