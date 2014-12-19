@@ -13,7 +13,7 @@ class WeixinAddonModel extends WeixinModel{
         $openid = get_openid();
         $token = get_token();
         if(!isBindSwUser($openid, $token)){
-            return $this->replyText("请先回复绑定并绑定真实信息以使用本功能.")
+            return $this->replyText("请先回复绑定并绑定真实信息以使用本功能.");
         }
         $url = addons_url ( 'Xytl://Xytl/center' );
         $articles [0] = array (
