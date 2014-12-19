@@ -18,7 +18,7 @@ class WeixinAddonModel extends WeixinModel{
         $url = addons_url ( 'Xytl://Xytl/center' );
         $articles [0] = array (
             'Title' => '学院通联',
-            'Description' => '学院各办公室, 学生会以及各班班长、团支书的联系电话及邮箱{$openid},{$token}',
+            'Description' => "学院各办公室, 学生会以及各班班长、团支书的联系电话及邮箱{$openid},{$token}",
             //'PicUrl' => '',
             'Url' => $url
         );
