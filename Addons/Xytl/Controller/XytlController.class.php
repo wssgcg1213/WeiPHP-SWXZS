@@ -30,10 +30,11 @@ class XytlController extends AddonsController{
 //            }
 //        }
         $data = M('xytl')->order('order desc')->select();
-        $res = [];
+        $res = array();
         foreach ($data as $v) {
             $res[$v['type']][] = $v;
         }
-        echo json_encode($res);
+        echo json_encode($data);
+//        echo json_encode($res);
     }
 }
