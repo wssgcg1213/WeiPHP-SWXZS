@@ -13,9 +13,10 @@ class WeixinAddonModel extends WeixinModel{
         $map['openid'] = get_openid();
         $map['token'] = get_token();
         $user = M('swuser')->where($map)->find();
-        if(!$user || !$user('user_state')){
-            return $this->replyText("请先回复绑定并绑定真实信息以使用本功能.");
+        if(!$user || !$user['user_state']){
+            $this->replyText("请先回复绑定并绑定真实信息以使用本功能.");
         }
+
         $url = addons_url ( 'Xytl://Xytl/center' );
         $articles [0] = array (
             'Title' => '学院通联',

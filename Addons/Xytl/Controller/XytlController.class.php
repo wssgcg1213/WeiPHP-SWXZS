@@ -21,7 +21,7 @@ class XytlController extends AddonsController{
         $map['openid'] = get_openid();
         $map['token'] = get_token();
         $user = M('swuser')->where($map)->find();
-        if(!$user || !$user('user_state')){
+        if(!$user || !$user['user_state']){
             $url = addons_url('SwUser://SwUser/addBind');
             return $this->error('请先绑定账户!', $url, 2);
         }
