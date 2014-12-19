@@ -204,12 +204,12 @@ abstract class Controller {
 		}
 		
 		// 绑定配置
-		$config = getAddonConfig ( 'SwUser' );
+		$config = getAddonConfig ( 'Xytl' );
 		$guestAccess = strtolower ( CONTROLLER_NAME ) != 'weixin';
 		$isWeixnLogin = ! empty ( $map ['token'] ) && ! empty ( $map ['openid'] ) && $map ['token'] != - 1 && $map ['token'] != - 1;
 		$userNeed = ($user ['id'] > 0 && $user ['status'] < 2) || (empty ( $user ) && $guestAccess);
 		if ($isWeixnLogin && $config ['need_bind'] == 1 && $userNeed) {
-			$bind_url = addons_url ( 'SwUser://SwUser/userCenter', $map );
+			$bind_url = addons_url ( 'Xytl://Xytl/userCenter', $map );
 			if ($dao === false) {
 				if ($config ['bind_start'] != 1 && strtolower ( $_REQUEST ['_addons'] ) != 'usercenter') {
 					Cookie ( '__forward__', $_SERVER ['REQUEST_URI'] );

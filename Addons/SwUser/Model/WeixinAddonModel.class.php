@@ -8,17 +8,17 @@ use Home\Model\WeixinModel;
  */
 class WeixinAddonModel extends WeixinModel{
 	function reply($dataArr, $keywordArr = array()) {
-		$config = getAddonConfig ( 'SwUser' ); // 获取后台插件的配置参数	
+		$config = getAddonConfig ( 'Xytl' ); // 获取后台插件的配置参数
 		//dump($config);
         $param ['token'] = get_token ();
         $param ['openid'] = get_openid ();
         $user = M('swuser')->where($params)->find();
 
         if($user['user_state']){
-            $url = addons_url ( 'SwUser://SwUser/center', $param );
+            $url = addons_url ( 'Xytl://Xytl/center', $param );
             $replyText = $user['real_name'].", 你已经绑定过了哦! <a href='$url'>点击进入</a>用户中心.";
         }else{
-            $url = addons_url ( 'SwUser://SwUser/addBind', $param );
+            $url = addons_url ( 'Xytl://Xytl/addBind', $param );
             $replyText = "你还没有绑定校园账号噢, 为了方便使用大部分功能, 请先<a href='$url'>点我绑定</a>.";
         }
         $this->replyText($replyText);

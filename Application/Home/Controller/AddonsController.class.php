@@ -88,7 +88,7 @@ class AddonsController extends Controller {
 	 * @param string $templateFile
 	 *        	指定要调用的模板文件
 	 *        	默认为空 由系统自动定位模板文件
-	 *        	支持格式: 空, index, SwUser/index 和 完整的地址
+	 *        	支持格式: 空, index, Xytl/index 和 完整的地址
 	 * @param string $charset
 	 *        	输出编码
 	 * @param string $contentType
@@ -114,7 +114,7 @@ class AddonsController extends Controller {
 		} elseif (stripos ( $templateFile, '/Addons/' ) === false && stripos ( $templateFile, THINK_PATH ) === false) {
 			if (stripos ( $templateFile, '/' ) === false) { // 如index
 				$templateFile = T ( 'Addons://' . _ADDONS . '@' . _CONTROLLER . '/' . $templateFile );
-			} elseif (stripos ( $templateFile, '@' ) === false) { // // 如 SwUser/index
+			} elseif (stripos ( $templateFile, '@' ) === false) { // // 如 Xytl/index
 				$templateFile = T ( 'Addons://' . _ADDONS . '@' . $templateFile );
 			}
 		}

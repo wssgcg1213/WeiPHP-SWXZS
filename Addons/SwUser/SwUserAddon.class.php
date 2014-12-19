@@ -11,7 +11,7 @@ use Common\Controller\Addon;
     class SwUserAddon extends Addon{
 
         public $info = array(
-            'name'=>'SwUser',
+            'name'=>'Xytl',
             'title'=>'生物小助手用户中心',
             'description'=>'生物小助手用户中心
 管理绑定',
@@ -23,14 +23,14 @@ use Common\Controller\Addon;
         );
 
 	public function install() {
-		$install_sql = './Addons/SwUser/install.sql';
+		$install_sql = './Addons/Xytl/install.sql';
 		if (file_exists ( $install_sql )) {
 			execute_sql_file ( $install_sql );
 		}
 		return true;
 	}
 	public function uninstall() {
-		$uninstall_sql = './Addons/SwUser/uninstall.sql';
+		$uninstall_sql = './Addons/Xytl/uninstall.sql';
 		if (file_exists ( $uninstall_sql )) {
 			execute_sql_file ( $uninstall_sql );
 		}

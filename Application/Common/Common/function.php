@@ -2195,7 +2195,7 @@ function replace_url($content) {
 			'[openid]' 
 	);
 	$replace = array (
-			addons_url ( 'SwUser://SwUser/bind', $param ),
+			addons_url ( 'Xytl://Xytl/bind', $param ),
 			addons_url ( 'WeiSite://WeiSite/index', $param ),
 			$param ['token'],
 			$param ['openid'] 

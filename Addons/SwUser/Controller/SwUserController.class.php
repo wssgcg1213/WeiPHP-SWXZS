@@ -29,7 +29,7 @@ class SwUserController extends AddonsController{
 
         $user = M( 'swuser' )->where($params)->find();
         if($user['user_state']){
-            $url = addons_url ( 'SwUser://SwUser/center' );
+            $url = addons_url ( 'Xytl://Xytl/center' );
             return $this->error( '您已经绑定过了! 现在跳转到用户中心.' , $url, 3);
         }
 
@@ -58,7 +58,7 @@ class SwUserController extends AddonsController{
             $map['openid'] = $openid;
             $map['user_state'] = 1;
             $_model->where($params)->save($map);
-            $url = addons_url( 'SwUser://SwUser/center' );
+            $url = addons_url( 'Xytl://Xytl/center' );
             return $this->success( '绑定成功! 现在跳转到用户中心.' , $url, 3);
         }else{
             $this->error ( ' 验证失败, 请检查您输入信息的正误, 或联系客服处理. ' );
@@ -74,11 +74,11 @@ class SwUserController extends AddonsController{
         $params['openid'] = get_openid();
         $user = M('swuser')->where($params)->find();
         if($user['user_state'] == 0){
-            $url = addons_url( 'SwUser://SwUser/addBind' );
+            $url = addons_url( 'Xytl://Xytl/addBind' );
             return $this->error ( ' 未绑定, 请先绑定账号! ', $url, 2);
         }
 
-        $url['unbind'] = addons_url('SwUser://SwUser/unBind');
+        $url['unbind'] = addons_url('Xytl://Xytl/unBind');
         $this->assign('url', $url);
         $this->assign('user', $user);
 
