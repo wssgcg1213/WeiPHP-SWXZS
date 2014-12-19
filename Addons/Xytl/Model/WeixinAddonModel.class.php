@@ -10,15 +10,16 @@ class WeixinAddonModel extends WeixinModel{
 	function reply($dataArr, $keywordArr = array()) {
 		//$config = getAddonConfig ( 'Xytl' ); // 获取后台插件的配置参数
 		//dump($config);
-        $openid = get_openid();
-        $token = get_token();
-//        if(!isBindSwUser($openid, $token)){
-//            return $this->replyText("请先回复绑定并绑定真实信息以使用本功能.");
-//        }
+        $map['openid'] = get_openid();
+        $map['token'] = get_token();
+        $user = M('swuser')->where($map)->find();
+        if(!$user || !$user('user_state')){
+            return $this->replyText("请先回复绑定并绑定真实信息以使用本功能.");
+        }
         $url = addons_url ( 'Xytl://Xytl/center' );
         $articles [0] = array (
             'Title' => '学院通联',
-            'Description' => "学院各办公室, 学生会以及各班班长、团支书的联系电话及邮箱{$openid},{$token}",
+            'Description' => "学院各办公室, 学生会以及各班班长、团支书的联系电话及邮箱.",
             //'PicUrl' => '',
             'Url' => $url
         );
