@@ -29,7 +29,7 @@ class XytlController extends AddonsController{
 //                }
 //            }
 //        }
-        $data = M('xytl')->order('order desc')->select();
+        $data = M('xytl')->select();
         $res = array();
         foreach ($data as $v) {
             $res[$v['type']][] = $v;
