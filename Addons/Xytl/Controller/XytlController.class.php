@@ -21,11 +21,11 @@ class XytlController extends AddonsController{
         $_model = M('xytl');
         $types = $_model->field('type')->group('type')->select();
         $data = M('xytl')->order('order desc')->select();
-        foreach($types as $item){
-            $item['field'] = array();
+        foreach($types as $k => $item){
+            $types[$k]['field'] = array();
             foreach($data as $i){
                 if($i['type'] == $item['type']){
-                    array_push($item['field'], $i);
+                    array_push($types[$k]['field'], $i);
                 }
             }
         }
