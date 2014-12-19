@@ -9,9 +9,10 @@ body{}
 .box h6{ line-height:40px; font-size:18px;}
 .item{  border-bottom:1px solid #eee; padding:10px 0; float:left; width:100%}
 .item .td{ float:left; color:#666}
-.item .title{ width:50%}
+.item .title{ width:100%}
 .item .count{ margin-right: 20px}
-.item .to{ color:#090; text-align:right}
+.item .to{ color:#090; text-align:right; width: 50%;}
 .unbind{ padding:15px; margin-top:200px;}
 .unbind p{ margin:20px 0; text-align:center}
-.fr{float: right}
+.fl{width: 100%;float:left;}
+.phone{width: 50%;text-align: right;}
