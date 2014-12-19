@@ -7,11 +7,14 @@
             <div class="box">
                 <h6>{$key}</h6>
                 <volist id="item" name="fitem">
-                    <a class="item" href="##">
+                    <div class="item" href="##">
                         <span class="td title des">{$item['description']}</span>
-                        <span class="td count phone">{$item['phone']}</span>
-                        <span class="td to email">{$item['email']}</a>
-                    </a>
+                        <p>
+                            <span class="td count phone">{$item['phone']}</span>
+                            <span class="td to email">{$item['email']}</span>
+                        </p>
+
+                    </div>
                 </volist>
             </div>
         </volist>
