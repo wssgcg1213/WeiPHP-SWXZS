@@ -33,7 +33,8 @@ class SwUserController extends AddonsController{
             return $this->error( '您已经绑定过了! 现在跳转到用户中心.' , $url, 3);
         }
 
-        $this->assign('res', $params);
+        $this->assign('token', $params['token']);
+        $this->assign('openid', $params['openid']);
         $this->display( 'addBind' );
     }
 
