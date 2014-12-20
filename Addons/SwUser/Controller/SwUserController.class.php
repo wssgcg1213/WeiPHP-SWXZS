@@ -4,18 +4,18 @@ namespace Addons\SwUser\Controller;
 use Home\Controller\AddonsController;
 
 class SwUserController extends AddonsController{
-//    /**
-//     * 后台显示微信用户列表数据
-//     */
-//    public function lists() {
-//        $this->assign ( 'add_button', true );
-//        $this->assign ( 'del_button', true );
-//        $this->assign ( 'check_all', false );
-//
-//        $model = $this->getModel ( 'swuser' );
-//
-//        parent::common_lists ( $model );
-//    }
+    /**
+     * 后台显示微信用户列表数据
+     */
+    public function liststu() {
+        $this->assign ( 'add_button', true );
+        $this->assign ( 'del_button', true );
+        $this->assign ( 'check_all', false );
+
+        $model = $this->getModel ( 'swuser' );
+
+        parent::common_lists ( $model );
+    }
 
     /**
      * display 增加绑定页面
