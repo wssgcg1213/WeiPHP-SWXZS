@@ -16,7 +16,7 @@ class WeixinAddonModel extends WeixinModel{
         $user = M('swuser')->where($map)->find();
 
         $text = $this->formText($user, $config);
-        $this->replyText($text);
+        $this->replyText($text.json_encode($config));
 
 	} 
 
