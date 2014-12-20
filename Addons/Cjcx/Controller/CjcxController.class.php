@@ -7,6 +7,7 @@ class CjcxController extends AddonsController{
     public function center(){
         $map['openid'] = get_openid();
         $map['token'] = get_token();
+        return echo json_encode($map);
         $user = M('swuser')->where($map)->find();
         if(!$user || !$user['user_state']){
             $url = addons_url('SwUser://SwUser/addBind');
