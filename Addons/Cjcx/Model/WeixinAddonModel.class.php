@@ -38,7 +38,9 @@ class WeixinAddonModel extends WeixinModel{
                 array_push($textArr, $_t);
             }
             $basic = implode("\n\n", $textArr);
-            $more = "\n\n"."<a href='".addons_url("Cjcx://Cjcx/center")."'>查看完整记录</a>";
+            $params['openid'] = get_openid();
+            $params['token'] = get_token();
+            $more = "\n\n"."<a href='".addons_url("Cjcx://Cjcx/center", $params)."'>查看完整记录</a>";
             return $basic.$more;
         }
     }
