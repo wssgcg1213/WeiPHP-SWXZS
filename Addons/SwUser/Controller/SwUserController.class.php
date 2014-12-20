@@ -13,7 +13,6 @@ class SwUserController extends AddonsController{
         $this->assign ( 'check_all', false );
 
         $model = $this->getModel ( 'swuser' );
-
         parent::common_lists ( $model );
     }
 
@@ -28,11 +27,13 @@ class SwUserController extends AddonsController{
         }
 
         $user = M( 'swuser' )->where($params)->find();
+
         if($user['user_state']){
             $url = addons_url ( 'SwUser://SwUser/center' );
             return $this->error( '您已经绑定过了! 现在跳转到用户中心.' , $url, 3);
         }
-        $this->assign("data", $params);
+
+        $this->assign('res', $params);
         $this->display( 'addBind' );
     }
 
