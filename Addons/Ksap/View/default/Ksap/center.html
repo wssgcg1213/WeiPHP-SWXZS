@@ -1,0 +1,30 @@
+<include file="Public/mobile_head"/>	
+<link href="{:ADDON_PUBLIC_PATH}/ksap.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+
+<body>
+	<div class="container">
+    	<div class="box user_box">
+        	<h1>{$user}的考试安排</h1>
+        </div>
+        <volist id="res" name="data">
+            <div class="box">
+                <h6>{$key}学期</h6>
+                <div class="item">
+                    <span class="tr course">科目</span>
+                    <span class="tr date">日期</span>
+                    <span class="tr time">时间</span>
+                    <span class="tr room">教室</span>
+                </div>
+                <volist id="item" name="res">
+                    <div class="item">
+                        <span class="td course">{$item['course']}</span>
+                        <span class="td date">{$item['date']}</span>
+                        <span class="td time">{$item['time']}</span>
+                        <span class="td room">{$item['room']}</span>
+                    </div>
+                </volist>
+            </div>
+        </volist>
+    </div>
+</body>
+</html>
