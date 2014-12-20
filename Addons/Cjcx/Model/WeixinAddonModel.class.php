@@ -10,9 +10,33 @@ class WeixinAddonModel extends WeixinModel{
 	function reply($dataArr, $keywordArr = array()) {
 		$config = getAddonConfig ( 'Cjcx' ); // 获取后台插件的配置参数	
 		//dump($config);
+        $map['openid'] = get_openid();
+        $map['token'] = get_token();
+
+        $user = M('swuser')->where($map)->find();
+
+        $text = $this->formText($user);
+        $this->replyText($text);
 
 	} 
 
+    private function formText($user){
+        if(!$user){
+            return '请先回复绑定并绑定真实信息以使用本功能.';
+        }
+        if($user['user_type'] == 1){
+            return '老师是没有考试成绩的0.0';
+        }else{
+            $text = '';
+            $userGrades = M('cjcx')->where(array('school_id' => $user['school_id']))->select();
+            foreach($userGrades as $item){
+                $text .= "课程名称: {$item['course_name']},\n";
+                $text .= "课程属性: {$item['class_type']}, \n";
+                $text .= "学分: {$item['study_score']},\n";
+                $text .= "分数: {$item['stu_grade']}\n\n";
+            }
+        }
+    }
 	// 关注公众号事件
 	public function subscribe() {
 		return true;
