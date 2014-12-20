@@ -51,6 +51,9 @@ class SwUserController extends AddonsController{
         $params['user_type'] = I('post.utype') ? 1 : 0;
         $params['school_id'] = I('post.sid');
         $userPwd = I('post.pwd');
+        if(!$params['school_id'] || !$userPwd){
+            $this->error ( ' 验证失败, 请检查您输入信息的正误, 或联系客服处理. ' );
+        }
 
         $_model = M( 'swuser' );
         $user = $_model->where($params)->find();
