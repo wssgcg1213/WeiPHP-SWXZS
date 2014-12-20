@@ -21,9 +21,9 @@ class CjcxController extends AddonsController{
             foreach ($data as $v) {
                 $res[$v['term']][] = $v;
             }
+            $this->assign('user', $user['real_name']);
             $this->assign('data', $res);
-//            $this->display('center');
-            echo json_encode($res);
+            $this->display('center');
         }
 
     }

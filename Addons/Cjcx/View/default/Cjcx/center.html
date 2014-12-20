@@ -4,28 +4,27 @@
 <body>
 	<div class="container">
     	<div class="box user_box">
-        	<h1>{$data['user']}的成绩表</h1>
+        	<h1>{$user}的成绩表</h1>
         </div>
-        <volist name="" id=""></volist>
-        <div class="box">
-        	<h6>{$data['term']}学期</h6>
-            <a class="item" href="#">
-            	<span class="td title">班级积分</span>
-                <span class="td count">120</span>
-                <span class="td to">查看详情&gt; </a>
-            </a>
-            <a class="item" href="#">
-            	<span class="td title">班级积分</span>
-                <span class="td count">120</span>
-                <span class="td to">查看详情&gt; </a>
-            </a>
-            <a class="item" href="#">
-            	<span class="td title">班级积分</span>
-                <span class="td count">120</span>
-                <span class="td to">查看详情&gt; </a>
-            </a>
-        </div>
-
+        <volist id="res" name="data">
+            <div class="box">
+                <h6>{$key}学期</h6>
+                <div class="item">
+                    <span class="tr course-name">课程</span>
+                    <span class="tr course-type">类型</span>
+                    <span class="tr course-score">学分</span>
+                    <span class="tr course-grade">成绩</span>
+                </div>
+                <volist id="item" name="res">
+                    <div class="item">
+                        <span class="td course-name">{$item['course_name']}</span>
+                        <span class="td course-type">{$item['class_type']}</span>
+                        <span class="td course-score">{$item['study_score']}</span>
+                        <span class="td course-grade">{$item['stu_grade']}</span>
+                    </div>
+                </volist>
+            </div>
+        </volist>
     </div>
 </body>
 </html>
