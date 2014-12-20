@@ -12,7 +12,7 @@ class WeixinAddonModel extends WeixinModel{
 		//dump($config);
         $param ['token'] = get_token ();
         $param ['openid'] = get_openid ();
-        $user = M('swuser')->where($params)->find();
+        $user = M('swuser')->where($param)->find();
 
         if($user && $user['user_state'] == 1){
             $url = addons_url ( 'SwUser://SwUser/center', $param );
