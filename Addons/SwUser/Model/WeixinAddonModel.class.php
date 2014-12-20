@@ -16,7 +16,7 @@ class WeixinAddonModel extends WeixinModel{
 
         if($user['user_state']){
             $url = addons_url ( 'SwUser://SwUser/center', $param );
-            $replyText = $user['real_name'].", 你已经绑定过了哦! <a href='$url'>点击进入</a>用户中心.";
+            $replyText = "你已经绑定过了哦! <a href='$url'>点击进入</a>用户中心.";
         }else{
             $url = addons_url ( 'SwUser://SwUser/addBind', $param );
             $replyText = "你还没有绑定校园账号噢, 为了方便使用大部分功能, 请先<a href='$url'>点我绑定</a>.";

@@ -16,7 +16,7 @@ class CjcxController extends AddonsController{
             $userCenter = addons_url('SwUser://SwUser/center');
             $this->error('老师没有成绩的.', $userCenter, 3);
         }else{
-            $data = M('cjcx')->where(array('school_id' => $user['school_id']))->select();
+            $data = M('cjcx')->where(array('school_id' => $user['school_id']))->order('term desc')->select();
             $res = array();
             foreach ($data as $v) {
                 $res[$v['term']][] = $v;
