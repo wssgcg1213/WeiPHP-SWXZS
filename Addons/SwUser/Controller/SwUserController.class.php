@@ -7,7 +7,7 @@ class SwUserController extends AddonsController{
     /**
      * 后台显示微信用户列表数据
      */
-    public function liststu() {
+    public function lists() {
         $this->assign ( 'add_button', true );
         $this->assign ( 'del_button', true );
         $this->assign ( 'check_all', false );
@@ -32,7 +32,7 @@ class SwUserController extends AddonsController{
             $url = addons_url ( 'SwUser://SwUser/center' );
             return $this->error( '您已经绑定过了! 现在跳转到用户中心.' , $url, 3);
         }
-
+        $this->assign("data", $params);
         $this->display( 'addBind' );
     }
 
@@ -40,8 +40,8 @@ class SwUserController extends AddonsController{
      * POST 接收绑定验证并跳转
      */
     public function postBind(){
-        $token = get_token();
-        $openid = get_openid();
+        $token = I('post.token');
+        $openid = I('post.openid');
         if(!$token || !$openid){
             $this->error ( ' 非法操作！');
         }
