@@ -16,7 +16,7 @@ class WeixinAddonModel extends WeixinModel{
         $user = M('swuser')->where($map)->find();
 
         $text = $this->formText($user, $config);
-        $this->replyText($text.json_encode($config));
+        $this->replyText($text);
 
 	} 
 
@@ -38,7 +38,7 @@ class WeixinAddonModel extends WeixinModel{
                 array_push($textArr, $_t);
             }
             $basic = implode("\n\n", $textArr);
-            $more = "\n<a href='".addons_url("Cjcx://Cjcx/center")."'>查看完整记录</a>";
+            $more = "\n\n"."<a href='".addons_url("Cjcx://Cjcx/center")."'>查看完整记录</a>";
             return $basic.$more;
         }
     }
