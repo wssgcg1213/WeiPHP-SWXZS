@@ -17,9 +17,13 @@ class CjcxController extends AddonsController{
             $this->error('老师没有成绩的.', $userCenter, 3);
         }else{
             $data = M('cjcx')->where(array('school_id' => $user['school_id']))->select();
-
-            $this->assign('data', $data);
-            $this->display('center');
+            $res = array();
+            foreach ($data as $v) {
+                $res[$v['term']][] = $v;
+            }
+            $this->assign('data', $res);
+//            $this->display('center');
+            echo json_encode($res);
         }
 
     }

@@ -4,15 +4,11 @@
 <body>
 	<div class="container">
     	<div class="box user_box">
-        	<div class="head"><img src="{:ADDON_PUBLIC_PATH}/head.jpg"/></div>
-            <p><strong>{$user["real_name"]}</strong></p>
-            <p><span>学/工号:</span>{$user['school_id']}</p>
-            <p><span>用户类型:</span><?php echo $user['user_type'] ? "教师" : "学生";?></p>
-            <p><a href="{$url['unbind']}">解除绑定</a></p>
-            <a class="edit" href="##" title="编辑"><img src="__IMG__/m/icon_pencil.png" width="30" width="30"/></a>
+        	<h1>{$data['user']}的成绩表</h1>
         </div>
+        <volist name="" id=""></volist>
         <div class="box">
-        	<h6>用户总积分:3000</h6>
+        	<h6>{$data['term']}学期</h6>
             <a class="item" href="#">
             	<span class="td title">班级积分</span>
                 <span class="td count">120</span>
@@ -29,38 +25,7 @@
                 <span class="td to">查看详情&gt; </a>
             </a>
         </div>
-        <div class="box">
-        	<h6>参加过的投票</h6>
-            <a class="item" href="#">
-            	<span class="td title">WeiPHP发展现状</span>
-                <span class="td count">&nbsp;</span>
-                <span class="td to">查看详情&gt; </a>
-            </a>
-            <a class="item" href="#">
-            	<span class="td title">WeiPHP发展现状</span>
-                <span class="td count">>&nbsp;</span>
-                <span class="td to">查看详情&gt; </a>
-            </a>
-        </div>
-        <div class="box">
-        	<h6>参加的抽奖</h6>
-            <a class="item" href="#">
-            	<span class="td title">幸运大抽奖</span>
-                <span class="td count">&nbsp;</span>
-                <span class="td to">查看详情&gt; </a>
-            </a>
-            <a class="item" href="#">
-            	<span class="td title">幸运大抽奖</span>
-                <span class="td count">>&nbsp;</span>
-                <span class="td to">查看详情&gt; </a>
-            </a>
-        </div>
-        <!--
-        <div class="unbind">
-        	<p>你还没绑定用户信息！</p>
-            <p><a class="btn" href="#">马上去绑定</a></p>
-        </div>
-        -->
+
     </div>
 </body>
 </html>
