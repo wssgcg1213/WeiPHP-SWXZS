@@ -27,15 +27,17 @@ class WeixinAddonModel extends WeixinModel{
         if($user['user_type'] == 1){
             return '老师是没有考试成绩的0.0';
         }else{
-            $text = '';
+            $textArr = array();
             $userGrades = M('cjcx')->where(array('school_id' => $user['school_id']))->select();
             foreach($userGrades as $item){
-                $text .= "课程名称: {$item['course_name']},\n";
-                $text .= "课程属性: {$item['class_type']}, \n";
-                $text .= "学分: {$item['study_score']},\n";
-                $text .= "分数: {$item['stu_grade']}\n\n";
+                $_t = '';
+                $_t .= "课程名称: {$item['course_name']},\n";
+                $_t .= "课程属性: {$item['class_type']}, \n";
+                $_t .= "学分: {$item['study_score']},\n";
+                $_t .= "分数: {$item['stu_grade']}";
+                array_push($textArr, $_t);
             }
-            return $text;
+            return implode("\n\n", $textArr);
         }
     }
 	// 关注公众号事件
