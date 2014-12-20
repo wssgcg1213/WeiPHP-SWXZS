@@ -35,6 +35,7 @@ class WeixinAddonModel extends WeixinModel{
                 $text .= "学分: {$item['study_score']},\n";
                 $text .= "分数: {$item['stu_grade']}\n\n";
             }
+            return $text;
         }
     }
 	// 关注公众号事件
