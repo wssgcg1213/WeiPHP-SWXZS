@@ -17,7 +17,7 @@ class WeixinAddonModel extends WeixinModel{
             $this->replyText("请先回复绑定并绑定真实信息以使用本功能.");
         }
 
-        $url = addons_url ( 'Xytl://Xytl/center' );
+        $url = addons_url ( 'Xytl://Xytl/center', $map );
         $articles [0] = array (
             'Title' => '学院通联',
             'Description' => "学院各办公室, 学生会以及各班班长、团支书的联系电话及邮箱.",
