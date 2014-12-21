@@ -10,6 +10,10 @@ class WeixinAddonModel extends WeixinModel{
 	function reply($dataArr, $keywordArr = array()) {
 		$config = getAddonConfig ( 'Zpxx' ); // 获取后台插件的配置参数	
 		//dump($config);
+        $num = $config['num'];
+
+        $text = implode("\n", $result);
+        $this->replyText($text);
 
 	} 
 
