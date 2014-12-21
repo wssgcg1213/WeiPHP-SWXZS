@@ -14,7 +14,7 @@ class WeixinAddonModel extends WeixinModel{
         $data = M('zpxx')->limit($num)->select();
         $result = array();
         foreach ($data as $item) {
-            $result[] = "{$item['time']} : <a href=\"{$item['url']}\">{$item['title']}</a>";
+            $result[] = "{$item['time']} : \n<a href=\"{$item['url']}\">{$item['title']}</a>";
         }
 
         $text = implode("\n\n", $result);
