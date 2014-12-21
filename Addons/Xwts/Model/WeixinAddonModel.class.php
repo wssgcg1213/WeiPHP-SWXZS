@@ -25,7 +25,7 @@ class WeixinAddonModel extends WeixinModel{
         $list = M ( 'weisite_category' )->where ( array("title" => $typeText) )->field ( 'id,title' )->find ();
         $cate_id = $list['id'];
 
-        $custom_replys = M('custom_reply_news')->where(array("cate_id" => $cate_id))->order('sort desc')->select();
+        $custom_replys = M('custom_reply_news')->where(array("cate_id" => $cate_id))->order('sort')->select();
         $count_custom_replys = count($custom_replys);
         $count = $count_custom_replys < $config['num'] ? $count_custom_replys : $config['num'];
         $article = array();
@@ -33,7 +33,7 @@ class WeixinAddonModel extends WeixinModel{
             $article[] = array(
                 'Title'=> $custom_replys[$i]['title'],
                 'Description'=> $custom_replys[$i]['intro'],
-                'PicUrl'=> $custom_replys[$i]['cover'],
+                'PicUrl'=> get_cover_url($custom_replys[$i]['cover']),
                 'Url'=> $this->_getNewsUrl ( $custom_replys[$i], $param )
             );
         }
