@@ -10,9 +10,8 @@ class WeixinAddonModel extends WeixinModel{
 	function reply($dataArr, $keywordArr = array()) {
 		$config = getAddonConfig ( 'Xwts' ); // 获取后台插件的配置参数
 
-        $tmp1 = implode(',', $dataArr);
-        $tmp2 = implode(',', $keywordArr);
-
+        $tmp2 = json_encode($keywordArr);
+        $this->replyText($tmp2);
         $article = array();
         for($i = 0; $i < $config['num']; $i++){
             $article[] = array(
