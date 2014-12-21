@@ -10,22 +10,43 @@ class WeixinAddonModel extends WeixinModel{
 	function reply($dataArr, $keywordArr = array()) {
 		$config = getAddonConfig ( 'Xwts' ); // 获取后台插件的配置参数
 
-        $tmp2 = json_encode($keywordArr);
-        $this->replyText($tmp2);
+        $param ['token'] = get_token ();
+        $param ['openid'] = get_openid ();
+
+        $aim_id = $keywordArr['aim_id'] ? $keywordArr['aim_id'] : 4;
+        $typeHash = array(
+          "1" => "生物热点资讯",
+          "2" => "教师技能培训",
+          "3" => "考研出国贴士",
+          "4" => "活动通知"
+        );
+        $typeText = $typeHash[$aim_id];
+
+        $custom_replys = M('custom_reply_news')->where(array("cate_id" => $typeText))->order('sort desc')->select();
+
         $article = array();
         for($i = 0; $i < $config['num']; $i++){
+
             $article[] = array(
-                'Title'=>"$tmp2",
-                'Description'=>"desc",
-                'PicUrl'=>'http://www.baidu.com/img/bd_logo1.png',
-                'Url'=>'http://baidu.com/'
+                'Title'=> $custom_replys[$i]['title'],
+                'Description'=> $custom_replys[$i]['intro'],
+                'PicUrl'=> $custom_replys[$i]['cover'],
+                'Url'=> $this->_getNewsUrl ( $custom_replys[$i], $param )
             );
         }
 
 		$this->replyNews($article);
 
-	} 
-
+	}
+    private function _getNewsUrl($info, $param) {
+        if (! empty ( $info ['jump_url'] )) {
+            $url = replace_url ( $info ['jump_url'] );
+        } else {
+            $param ['id'] = $info ['id'];
+            $url = addons_url ( 'CustomReply://CustomReply/detail', $param );
+        }
+        return $url;
+    }
 	// 关注公众号事件
 	public function subscribe() {
 		return true;
