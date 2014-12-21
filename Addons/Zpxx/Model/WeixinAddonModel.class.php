@@ -14,10 +14,10 @@ class WeixinAddonModel extends WeixinModel{
         $data = M('zpxx')->limit($num)->select();
         $result = array();
         foreach ($data as $item) {
-            $result[] = "{$item['time']} : <a href='".$item['url']."'>{$item['title']}";
+            $result[] = "{$item['time']} : <a href=\"{$item['url']}\">{$item['title']}</a>";
         }
 
-        $text = implode("\n", $result);
+        $text = implode("\n\n", $result);
         $this->replyText($text);
 
 	} 
