@@ -18,8 +18,8 @@ class WeixinAddonModel extends WeixinModel{
             $article[] = array(
                 'Title'=>"$tmp1",
                 'Description'=>"$tmp2",
-                'PicUrl'=>'',
-                'Url'=>''
+                'PicUrl'=>'http://www.baidu.com/img/bd_logo1.png',
+                'Url'=>'http://baidu.com/'
             );
         }
 
