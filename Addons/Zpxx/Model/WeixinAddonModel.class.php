@@ -11,6 +11,11 @@ class WeixinAddonModel extends WeixinModel{
 		$config = getAddonConfig ( 'Zpxx' ); // 获取后台插件的配置参数	
 		//dump($config);
         $num = $config['num'];
+        $data = M('apxx')->limit($num)->select();
+        $result = array();
+        foreach ($data as $item) {
+            $result[] = "{$item['time']} : <a href='".$item['url']."'>{$item['title']}";
+        }
 
         $text = implode("\n", $result);
         $this->replyText($text);
