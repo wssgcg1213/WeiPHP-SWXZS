@@ -25,7 +25,7 @@ class ZpxxController extends AddonsController{
                 $result[] = $tmp;
             }
 		}
-        
+
         echo json_encode($result);
     }
 
@@ -35,7 +35,7 @@ class ZpxxController extends AddonsController{
   		$s = mb_convert_encoding($source, "UTF-8", "GB18030");
   		preg_match_all("/<div id=attitle>([^>]+)<\/div>/i", $s , $_title);
         preg_match_all("/<div id=dwinfor align=\"center\">([^\n]+).*/i", $s, $_subContent);
-        preg_match_all("/<p>([^\n]+).*/i", $s, $_mainContent);
+        preg_match_all("/<FONT style=([^\n]+).*/i", $s, $_mainContent);
   		$title = trim($_title[1][0]);
         $content = $_subContent[0][0].$_mainContent[0][0];
   		return array(
