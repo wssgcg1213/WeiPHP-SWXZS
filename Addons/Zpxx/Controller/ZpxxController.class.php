@@ -18,7 +18,7 @@ class ZpxxController extends AddonsController{
             $tmp = array(
 				"time" => $t,
                 "title" => $c['title'],
-				"content" => $c['content']
+				"url" => $c['url']
 			);
             if(!$model->where(array("title" => $c['title']))->find()){
                 $model->add($tmp);
@@ -34,13 +34,13 @@ class ZpxxController extends AddonsController{
     	$source = wp_file_get_contents($url);
   		$s = mb_convert_encoding($source, "UTF-8", "GB18030");
   		preg_match_all("/<div id=attitle>([^>]+)<\/div>/i", $s , $_title);
-        preg_match_all("/<div id=dwinfor align=\"center\">([^\n]+).*/i", $s, $_subContent);
-        preg_match_all("/<FONT style=([^\n]+).*/i", $s, $_mainContent);
+//        preg_match_all("/<div id=dwinfor align=\"center\">([^\n]+).*/i", $s, $_subContent);
+//        preg_match_all("/<FONT style=([^\n]+).*/i", $s, $_mainContent);
   		$title = trim($_title[1][0]);
-        $content = $_subContent[0][0].$_mainContent[0][0];
+//        $content = $_subContent[0][0].$_mainContent[0][0];
   		return array(
           "title" => $title,
-          "content" => htmlspecialchars($content)
+          "url" => $url
         );
     }
 }
