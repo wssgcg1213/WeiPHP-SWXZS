@@ -12,7 +12,7 @@ class ZpxxController extends AddonsController{
 
         $model = M('zpxx');
 		$result = array();
-		foreach ($times as $k => $t) {
+		foreach ($times[0] as $k => $t) {
             $c = $this->get_content_by_url_id($urls[1][$k]);
             $tmp = array(
 				"time" => $t,
