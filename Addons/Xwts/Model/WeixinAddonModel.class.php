@@ -22,11 +22,14 @@ class WeixinAddonModel extends WeixinModel{
         );
         $typeText = $typeHash[$aim_id];
 
-        $custom_replys = M('custom_reply_news')->where(array("cate_id" => $typeText))->order('sort desc')->select();
+        $list = M ( 'weisite_category' )->where ( array("title" => $typeText) )->field ( 'id,title' )->find ();
+        $cate_id = $list['id'];
 
+        $custom_replys = M('custom_reply_news')->where(array("cate_id" => $cate_id))->order('sort desc')->select();
+        $count_custom_replys = count($custom_replys);
+        $count = $count_custom_replys < $config['num'] ? $count_custom_replys : $config['num'];
         $article = array();
-        for($i = 0; $i < $config['num']; $i++){
-
+        for($i = 0; $i < $count; $i++){
             $article[] = array(
                 'Title'=> $custom_replys[$i]['title'],
                 'Description'=> $custom_replys[$i]['intro'],
