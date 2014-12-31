@@ -28,6 +28,11 @@ class WeixinAddonModel extends WeixinModel{
         }else{
             $textArr = array();
             $userSchedules = M('ksap')->where(array('school_id' => $user['school_id'], 'term' => $config['term']))->select();
+
+            if(0 == count($userSchedules)){
+                return "空记录! 还没更新呢!";
+            }
+            
             foreach($userSchedules as $item){
                 $_t = '';
                 $_t .= "科目: {$item['course']},\n";
