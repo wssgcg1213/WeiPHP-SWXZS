@@ -29,6 +29,10 @@ class WeixinAddonModel extends WeixinModel{
         }else{
             $textArr = array();
             $userGrades = M('cjcx')->where(array('school_id' => $user['school_id'], 'term' => $config['term']))->select();
+            if(0 == count($userGrades)){
+                return "空记录! 还没有更新呢!";
+            }
+
             foreach($userGrades as $item){
                 $_t = '';
                 $_t .= "课程名称: {$item['course_name']},\n";
