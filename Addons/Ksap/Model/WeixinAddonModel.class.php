@@ -32,7 +32,7 @@ class WeixinAddonModel extends WeixinModel{
             if(0 == count($userSchedules)){
                 return "空记录! 还没更新呢!";
             }
-            
+
             foreach($userSchedules as $item){
                 $_t = '';
                 $_t .= "科目: {$item['course']},\n";
