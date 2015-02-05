@@ -21,7 +21,7 @@ class WeixinAddonModel extends WeixinModel{
             $url = addons_url ( 'Swtz://Swtz/center', $params);
             $articles [$k] = array (
                 'Title' => $v['title'],
-                'Description' => $v['content'],
+                'Description' => $v['intro'],
                 'Url' => $url
             );
         }
