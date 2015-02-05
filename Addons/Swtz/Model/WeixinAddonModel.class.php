@@ -14,7 +14,7 @@ class WeixinAddonModel extends WeixinModel{
 		$map['openid'] = get_openid();
 
 		$_model = M('swtz');
-		$arts = $_model->limit($num)->select();
+		$arts = $_model->limit($num)->order('id desc')->select();
         foreach($arts as $k => $v) {
             $params = $map;
             $params [ 'id' ] = $v [ 'id' ];
