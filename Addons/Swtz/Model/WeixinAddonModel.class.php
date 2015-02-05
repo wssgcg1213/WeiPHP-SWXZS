@@ -12,10 +12,14 @@ class WeixinAddonModel extends WeixinModel{
 		$num = $config['num'];
 		$map['token'] = get_token();
 		$map['openid'] = get_openid();
-
+        $user = M('swuser')->where($map)->find();
+        if(!$user){
+            $this->replyText('请先绑定账户!');
+        }
 		$_model = M('swtz');
 		$arts = $_model->limit($num)->order('id desc')->select();
         foreach($arts as $k => $v) {
+            if($v['type'] != $user['user_type']) continue;
             $params = $map;
             $params [ 'id' ] = $v [ 'id' ];
             $url = addons_url ( 'Swtz://Swtz/center', $params);
