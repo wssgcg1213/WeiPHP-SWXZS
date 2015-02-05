@@ -12,17 +12,19 @@ class WeixinAddonModel extends WeixinModel{
 		$num = $config['num'];
 		$map['token'] = get_token();
 		$map['openid'] = get_openid();
-		
+
 		$_model = M('swtz');
-
 		$arts = $_model->limit($num)->select();
-
-		$url = addons_url ( 'Swtz://Swtz/center' , $map);
-		$articles [0] = $articles [1] = array (
-				'Title' => $arts[0]['title'],
-				'Description' => $arts[0]['content'],
-				'Url' => $url 
-		);
+        foreach($arts as $k => $v) {
+            $params = $map;
+            $params [ 'id' ] = $v [ 'id' ];
+            $url = addons_url ( 'Swtz://Swtz/center', $params);
+            $articles [$k] = array (
+                'Title' => $v['title'],
+                'Description' => $v['content'],
+                'Url' => $url
+            );
+        }
 		$this->replyNews($articles);
 
 	} 

@@ -25,7 +25,7 @@ class SwtzController extends AddonsController{
                 $this->error("用户非法!");
             }
         }
-        
+
         $this->assign ( 'info', $info );
 
 		$this->display('center');
