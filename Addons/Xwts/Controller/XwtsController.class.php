@@ -52,12 +52,13 @@ class XwtsController extends AddonsController{
             $vo ['cate_id'] = $cate [$vo ['cate_id']];
         }
         $filtered_list_data = [];
-        foreach ( $list_data as $vo ) {
+        foreach ( $list_data ['list_data'] as $vo ) {
             if($vo ['cate_id']){
                 $filtered_list_data[] = $vo;
             }
         }
-        $this->assign ( $filtered_list_data );
+        $list_data ['list_data'] = $filtered_list_data;
+        $this->assign ( $list_data );
         // dump ( $list_data );
 
         $templateFile = $this->model ['template_list'] ? $this->model ['template_list'] : '';
