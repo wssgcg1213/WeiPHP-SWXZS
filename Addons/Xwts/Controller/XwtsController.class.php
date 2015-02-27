@@ -53,7 +53,7 @@ class XwtsController extends AddonsController{
         }
         $filtered_list_data = [];
         foreach ( $list_data ['list_data'] as $vo ) {
-            if($vo ['cate_id']){
+            if(!is_int($vo ['cate_id'])){
                 $filtered_list_data[] = $vo;
             }
         }
