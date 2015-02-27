@@ -11,7 +11,7 @@ class WeixinAddonModel extends WeixinModel{
 		$config = getAddonConfig ( 'Zpxx' ); // 获取后台插件的配置参数	
 		//dump($config);
         $num = $config['num'];
-        $data = M('zpxx')->limit($num)->select();
+        $data = M('zpxx')->limit($num)->sort('id desc')->select();
         $result = array();
         foreach ($data as $item) {
             $result[] = "{$item['time']} : \n<a href=\"{$item['url']}\">{$item['title']}</a>";
