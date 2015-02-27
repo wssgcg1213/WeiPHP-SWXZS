@@ -118,9 +118,11 @@ class XwtsController extends AddonsController{
         $Model = D ( parse_name ( get_table_name ( $model ['id'] ), 1 ) );
 
         if (IS_POST) {
+            if(I('cate_id') == 0){
+                $this->error ( '请指定所属类别!' );
+            }
             // 获取模型的字段信息
             $Model = $this->checkAttr ( $Model, $model ['id'] );
-            die(json_encode($Model));
             if ($Model->create () && $id = $Model->add ()) {
                 $this->_saveKeyword ( $model, $id, 'custom_reply_news' );
 
