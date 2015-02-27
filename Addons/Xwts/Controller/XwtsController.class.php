@@ -62,8 +62,14 @@ class XwtsController extends AddonsController{
         $this->display ( $templateFile );
     }
 
+//    // 通用插件的编辑模型
+//    public function edit($model = null, $id = 0) {
+//        is_array ( $model ) || $model = $this->getModel ( 'custom_reply_news' );
+//        $templateFile = $this->getAddonTemplate ( $model ['template_edit'] );
+//        parent::common_edit ( $model, $id, $templateFile );
+//    }
     public function edit() {
-        $model = $this->getModel ( 'custom_reply_news' );
+        $model = $this->getModel('custom_reply_news');
         $id = I ( 'id' );
 
         if (IS_POST) {
@@ -100,49 +106,30 @@ class XwtsController extends AddonsController{
 
             $this->assign ( 'fields', $fields );
             $this->assign ( 'data', $data );
-//            $this->meta_title = '编辑' . $model ['title'];
+            $this->meta_title = '编辑' . $model ['title'];
 
             $this->display ();
         }
     }
 
     // 通用插件的增加模型
-    public function add() {
-        $model = $this->getModel ( 'custom_reply_news' );
-        $Model = D ( parse_name ( get_table_name ( $model ['id'] ), 1 ) );
+    public function add($model = null) {
+        is_array ( $model ) || $model = $this->getModel ( 'custom_reply_news' );
+        $templateFile = $this->getAddonTemplate ( $model ['template_add'] );
 
-        if (IS_POST) {
-            // 获取模型的字段信息
-            $Model = $this->checkAttr ( $Model, $model ['id'] );
-            if ($Model->create () && $id = $Model->add ()) {
-                $this->_saveKeyword ( $model, $id, 'custom_reply_news' );
-
-                $this->success ( '添加' . $model ['title'] . '成功！', U ( 'lists?model=' . $model ['name'] ) );
-            } else {
-                $this->error ( $Model->getError () );
-            }
-        } else {
-            $fields = get_model_attribute ( $model ['id'] );
-
-            $extra = $this->getCateData ();
-            if (! empty ( $extra )) {
-                foreach ( $fields [1] as &$vo ) {
-                    if ($vo ['name'] == 'cate_id') {
-                        $vo ['extra'] .= "\r\n" . $extra;
-                    }
-                }
-            }
-
-            $this->assign ( 'fields', $fields );
-            $this->meta_title = '新增' . $model ['title'];
-
-            $this->display ();
-        }
+        parent::common_add ( $model, $templateFile );
     }
+
     // 通用插件的删除模型
     public function del($model = null, $ids = null) {
         parent::common_del ( 'custom_reply_news', $ids );
     }
+
+    // 重写的保存关键词方法
+    public function _saveKeyword($model, $id, $extra_text) {
+        D ( 'Common/Keyword' )->set ( $_POST ['keyword'], _ADDONS, $id, $_POST ['keyword_type'], $extra_text );
+    }
+
 
     public function center(){
         $map['token'] = get_token();
