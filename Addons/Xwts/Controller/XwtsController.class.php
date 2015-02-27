@@ -50,6 +50,9 @@ class XwtsController extends AddonsController{
         foreach ( $list_data ['list_data'] as &$vo ) {
             $vo ['cate_id'] = intval ( $vo ['cate_id'] );
             $vo ['cate_id'] = $cate [$vo ['cate_id']];
+            if(!$vo ['cate_id']){
+                unset($vo);
+            }
         }
         echo json_encode($list_data);
         $this->assign ( $list_data );
