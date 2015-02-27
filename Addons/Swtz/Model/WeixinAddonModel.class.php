@@ -17,7 +17,9 @@ class WeixinAddonModel extends WeixinModel{
             $this->replyText('请先绑定账户!');
         }
 		$_model = M('swtz');
-		$arts = $_model->limit($num)->order('id desc')->select();
+		$arts = $_model->order('id desc')->where([
+            "type" => $user['user_type']
+        ])->limit($num)->select();
         foreach($arts as $k => $v) {
             if($v['type'] != $user['user_type']) continue;
             $params = $map;
