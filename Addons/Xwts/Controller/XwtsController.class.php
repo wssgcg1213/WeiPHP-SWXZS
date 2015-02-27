@@ -130,6 +130,16 @@ class XwtsController extends AddonsController{
         D ( 'Common/Keyword' )->set ( $_POST ['keyword'], _ADDONS, $id, $_POST ['keyword_type'], $extra_text );
     }
 
+    // 获取所属分类
+    function getCateData() {
+        $map ['is_show'] = 1;
+        $map ['token'] = get_token ();
+        $list = M ( 'weisite_category' )->where ( $map )->select ();
+        foreach ( $list as $v ) {
+            $extra .= $v ['id'] . ':' . $v ['title'] . "\r\n";
+        }
+        return $extra;
+    }
 
     public function center(){
         $map['token'] = get_token();
