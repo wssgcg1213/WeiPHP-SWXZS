@@ -29,6 +29,12 @@ class XwtsController extends AddonsController{
         $templateFile = $this->getAddonTemplate ( $model ['template_list'] );
         parent::common_lists ( $model, $page, $templateFile );
     }
+    public function edit($model = null, $id = 0) {
+        is_array ( $model ) || $model = $this->getModel ( 'custom_reply_news' );
+        $templateFile = $this->getAddonTemplate ( $model ['template_edit'] );
+        parent::common_edit ( $model, $id, $templateFile );
+    }
+
     public function center(){
         $map['token'] = get_token();
         $map['openid'] = get_openid();
