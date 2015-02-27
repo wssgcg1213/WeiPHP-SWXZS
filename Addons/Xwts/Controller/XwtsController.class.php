@@ -62,75 +62,86 @@ class XwtsController extends AddonsController{
         $this->display ( $templateFile );
     }
 
-    // 通用插件的编辑模型
-    public function edit($model = null, $id = 0) {
-        is_array ( $model ) || $model = $this->getModel ( 'custom_reply_news' );
-        $templateFile = $this->getAddonTemplate ( $model ['template_edit'] );
-        parent::common_edit ( $model, $id, $templateFile );
+    public function edit() {
+        $model = $this->getModel ( 'custom_reply_news' );
+        $id = I ( 'id' );
+
+        if (IS_POST) {
+            $Model = D ( parse_name ( get_table_name ( $model ['id'] ), 1 ) );
+            // 获取模型的字段信息
+            $Model = $this->checkAttr ( $Model, $model ['id'] );
+            if ($Model->create () && $Model->save ()) {
+                $this->_saveKeyword ( $model, $id, 'custom_reply_news' );
+
+                $this->success ( '保存' . $model ['title'] . '成功！', U ( 'lists?model=' . $model ['name'] ) );
+            } else {
+                $this->error ( $Model->getError () );
+            }
+        } else {
+            $fields = get_model_attribute ( $model ['id'] );
+
+            $extra = $this->getCateData ();
+            if (! empty ( $extra )) {
+                foreach ( $fields [1] as &$vo ) {
+                    if ($vo ['name'] == 'cate_id') {
+                        $vo ['extra'] .= "\r\n" . $extra;
+                    }
+                }
+            }
+
+            // 获取数据
+            $data = M ( get_table_name ( $model ['id'] ) )->find ( $id );
+            $data || $this->error ( '数据不存在！' );
+
+            $token = get_token ();
+            if (isset ( $data ['token'] ) && $token != $data ['token'] && defined ( 'ADDON_PUBLIC_PATH' )) {
+                $this->error ( '非法访问！' );
+            }
+
+            $this->assign ( 'fields', $fields );
+            $this->assign ( 'data', $data );
+            $this->meta_title = '编辑' . $model ['title'];
+
+            $this->display ();
+        }
     }
 
     // 通用插件的增加模型
-    public function add($model = null) {
-        is_array ( $model ) || $model = $this->getModel ( 'custom_reply_news' );
-        $templateFile = $this->getAddonTemplate ( $model ['template_add'] );
+    public function add() {
+        $model = $this->getModel ( 'custom_reply_news' );
+        $Model = D ( parse_name ( get_table_name ( $model ['id'] ), 1 ) );
 
-        parent::common_add ( $model, $templateFile );
+        if (IS_POST) {
+            // 获取模型的字段信息
+            $Model = $this->checkAttr ( $Model, $model ['id'] );
+            if ($Model->create () && $id = $Model->add ()) {
+                $this->_saveKeyword ( $model, $id, 'custom_reply_news' );
+
+                $this->success ( '添加' . $model ['title'] . '成功！', U ( 'lists?model=' . $model ['name'] ) );
+            } else {
+                $this->error ( $Model->getError () );
+            }
+        } else {
+            $fields = get_model_attribute ( $model ['id'] );
+
+            $extra = $this->getCateData ();
+            if (! empty ( $extra )) {
+                foreach ( $fields [1] as &$vo ) {
+                    if ($vo ['name'] == 'cate_id') {
+                        $vo ['extra'] .= "\r\n" . $extra;
+                    }
+                }
+            }
+
+            $this->assign ( 'fields', $fields );
+            $this->meta_title = '新增' . $model ['title'];
+
+            $this->display ();
+        }
     }
-
     // 通用插件的删除模型
     public function del($model = null, $ids = null) {
         parent::common_del ( 'custom_reply_news', $ids );
-    }
-
-    public function _get_model_list($model = null, $page = 0, $order = 'id desc') {
-        $page || $page = I ( 'p', 1, 'intval' ); // 默认显示第一页数据
-
-        // 解析列表规则
-        $list_data = $this->_list_grid ( $model );
-        $grids = $list_data ['list_grids'];
-        $fields = $list_data ['fields'];
-
-        // 搜索条件
-        $map = $this->_search_map ( $model, $fields );
-
-        $row = empty ( $model ['list_row'] ) ? 20 : $model ['list_row'];
-
-        // 读取模型数据列表
-        if ($model ['extend']) {
-            $name = get_table_name ( $model ['id'] );
-            $parent = get_table_name ( $model ['extend'] );
-            $fix = C ( "DB_PREFIX" );
-
-            $key = array_search ( 'id', $fields );
-            if (false === $key) {
-                array_push ( $fields, "{$fix}{$parent}.id as id" );
-            } else {
-                $fields [$key] = "{$fix}{$parent}.id as id";
-            }
-
-            /* 查询记录数 */
-            $count = M ( $parent )->join ( "INNER JOIN {$fix}{$name} ON {$fix}{$parent}.id = {$fix}{$name}.id" )->where ( $map )->count ();
-
-            // 查询数据
-            $data = M ( $parent )->join ( "INNER JOIN {$fix}{$name} ON {$fix}{$parent}.id = {$fix}{$name}.id" )->field ( empty ( $fields ) ? true : $fields )->where ( $map )->order ( "{$fix}{$parent}.{$order}" )->page ( $page, $row )->select ();
-        } else {
-            empty ( $fields ) || in_array ( 'id', $fields ) || array_push ( $fields, 'id' );
-            $name = parse_name ( get_table_name ( $model ['id'] ), true );
-            $data = M ( $name )->field ( empty ( $fields ) ? true : $fields )->where ( $map )->order ( $order )->page ( $page, $row )->select ();
-
-            /* 查询记录总数 */
-            $count = M ( $name )->where ( $map )->count ();
-        }
-        $list_data ['list_data'] = $data;
-
-        // 分页
-        if ($count > $row) {
-            $page = new \Think\Page ( $count, $row );
-            $page->setConfig ( 'theme', '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% %HEADER%' );
-            $list_data ['_page'] = $page->show ();
-        }
-//        echo(json_encode($list_data));
-        return $list_data;
     }
 
     public function center(){
