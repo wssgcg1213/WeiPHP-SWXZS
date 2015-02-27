@@ -102,7 +102,7 @@ class XwtsController extends AddonsController{
             $page->setConfig ( 'theme', '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% %HEADER%' );
             $list_data ['_page'] = $page->show ();
         }
-        var_dump($list_data);
+        echo(json_encode($list_data));
         return $list_data;
     }
 
