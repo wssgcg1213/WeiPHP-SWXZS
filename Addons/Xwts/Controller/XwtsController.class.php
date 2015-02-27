@@ -51,7 +51,7 @@ class XwtsController extends AddonsController{
             $vo ['cate_id'] = intval ( $vo ['cate_id'] );
             $vo ['cate_id'] = $cate [$vo ['cate_id']];
             if(!$vo ['cate_id']){
-                unset($vo);
+                echo json_encode($vo);
             }
         }
         echo json_encode($list_data);
