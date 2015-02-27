@@ -51,7 +51,13 @@ class XwtsController extends AddonsController{
             $vo ['cate_id'] = intval ( $vo ['cate_id'] );
             $vo ['cate_id'] = $cate [$vo ['cate_id']];
         }
-        $this->assign ( $list_data );
+        $filtered_list_data = [];
+        foreach ( $list as $vo ) {
+            if($vo ['cate_id']){
+                $filtered_list_data[] = $vo;
+            }
+        }
+        $this->assign ( $filtered_list_data );
         // dump ( $list_data );
 
         $templateFile = $this->model ['template_list'] ? $this->model ['template_list'] : '';
@@ -125,7 +131,7 @@ class XwtsController extends AddonsController{
             $page->setConfig ( 'theme', '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% %HEADER%' );
             $list_data ['_page'] = $page->show ();
         }
-        echo(json_encode($list_data));
+//        echo(json_encode($list_data));
         return $list_data;
     }
 
