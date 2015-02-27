@@ -24,6 +24,11 @@ class XwtsController extends AddonsController{
 //        // dump ( $config );
 //        // dump(get_token());
 //    }
+    public function lists($model = null, $page = 0) {
+        is_array ( $model ) || $model = $this->getModel ( $model );
+        $templateFile = $this->getAddonTemplate ( $model ['template_list'] );
+        parent::common_lists ( $model, $page, $templateFile );
+    }
     public function center(){
         $map['token'] = get_token();
         $map['openid'] = get_openid();
