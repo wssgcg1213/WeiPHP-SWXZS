@@ -25,13 +25,36 @@ class XwtsController extends AddonsController{
 //        // dump(get_token());
 //    }
     public function lists($model = null, $page = 0) {
+//        $model = $this->getModel ( 'custom_reply_news' );
+//        $templateFile = $this->getAddonTemplate ( $model ['template_list'] );
+//        $order = 'id desc';
+//        $list_data = $this->_get_model_list ( $model, $page, $order );
+//        $this->assign ( $list_data );
+//        // dump($list_data);
+//        $templateFile || $templateFile = $model ['template_list'] ? $model ['template_list'] : '';
+//        $this->display ( $templateFile );
         $model = $this->getModel ( 'custom_reply_news' );
-        $templateFile = $this->getAddonTemplate ( $model ['template_list'] );
-        $order = 'id desc';
-        $list_data = $this->_get_model_list ( $model, $page, $order );
+        $map ['token'] = get_token ();
+        session ( 'common_condition', $map );
+
+        $list_data = $this->_get_model_list ( $model );
+
+        // 分类数据
+        $map ['is_show'] = 1;
+        $list = M ( 'weisite_category' )->where ( $map )->field ( 'id,title' )->select ();
+        $cate [0] = '';
+        foreach ( $list as $vo ) {
+            $cate [$vo ['id']] = $vo ['title'];
+        }
+
+        foreach ( $list_data ['list_data'] as &$vo ) {
+            $vo ['cate_id'] = intval ( $vo ['cate_id'] );
+            $vo ['cate_id'] = $cate [$vo ['cate_id']];
+        }
         $this->assign ( $list_data );
-        // dump($list_data);
-        $templateFile || $templateFile = $model ['template_list'] ? $model ['template_list'] : '';
+        // dump ( $list_data );
+
+        $templateFile = $this->model ['template_list'] ? $this->model ['template_list'] : '';
         $this->display ( $templateFile );
     }
 
