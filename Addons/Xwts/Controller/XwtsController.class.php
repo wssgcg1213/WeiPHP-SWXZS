@@ -25,7 +25,7 @@ class XwtsController extends AddonsController{
 //        // dump(get_token());
 //    }
     public function lists($model = null, $page = 0) {
-        is_array ( $model ) || $model = $this->getModel ( $model );
+        $model = $this->getModel ( 'custom_reply_news' );
         $templateFile = $this->getAddonTemplate ( $model ['template_list'] );
         parent::common_lists ( $model, $page, $templateFile );
     }
