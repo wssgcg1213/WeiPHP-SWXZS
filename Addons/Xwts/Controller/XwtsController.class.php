@@ -54,7 +54,7 @@ class XwtsController extends AddonsController{
                 unset($list_data ['list_data'][array_search($vo , $list_data ['list_data'])]);
             }
         }
-        echo json_encode($list_data);
+//        echo json_encode($list_data);
         $this->assign ( $list_data );
         // dump ( $list_data );
 
