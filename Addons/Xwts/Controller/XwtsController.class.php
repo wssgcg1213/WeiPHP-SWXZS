@@ -27,12 +27,83 @@ class XwtsController extends AddonsController{
     public function lists($model = null, $page = 0) {
         $model = $this->getModel ( 'custom_reply_news' );
         $templateFile = $this->getAddonTemplate ( $model ['template_list'] );
-        parent::common_lists ( $model, $page, $templateFile );
+        $order = 'id desc';
+        $list_data = $this->_get_model_list ( $model, $page, $order );
+        $this->assign ( $list_data );
+        // dump($list_data);
+        $templateFile || $templateFile = $model ['template_list'] ? $model ['template_list'] : '';
+        $this->display ( $templateFile );
     }
+
+    // 通用插件的编辑模型
     public function edit($model = null, $id = 0) {
         is_array ( $model ) || $model = $this->getModel ( 'custom_reply_news' );
         $templateFile = $this->getAddonTemplate ( $model ['template_edit'] );
         parent::common_edit ( $model, $id, $templateFile );
+    }
+
+    // 通用插件的增加模型
+    public function add($model = null) {
+        is_array ( $model ) || $model = $this->getModel ( 'custom_reply_news' );
+        $templateFile = $this->getAddonTemplate ( $model ['template_add'] );
+
+        parent::common_add ( $model, $templateFile );
+    }
+
+    // 通用插件的删除模型
+    public function del($model = null, $ids = null) {
+        parent::common_del ( 'custom_reply_news', $ids );
+    }
+
+    public function _get_model_list($model = null, $page = 0, $order = 'id desc') {
+        $page || $page = I ( 'p', 1, 'intval' ); // 默认显示第一页数据
+
+        // 解析列表规则
+        $list_data = $this->_list_grid ( $model );
+        $grids = $list_data ['list_grids'];
+        $fields = $list_data ['fields'];
+
+        // 搜索条件
+        $map = $this->_search_map ( $model, $fields );
+
+        $row = empty ( $model ['list_row'] ) ? 20 : $model ['list_row'];
+
+        // 读取模型数据列表
+        if ($model ['extend']) {
+            $name = get_table_name ( $model ['id'] );
+            $parent = get_table_name ( $model ['extend'] );
+            $fix = C ( "DB_PREFIX" );
+
+            $key = array_search ( 'id', $fields );
+            if (false === $key) {
+                array_push ( $fields, "{$fix}{$parent}.id as id" );
+            } else {
+                $fields [$key] = "{$fix}{$parent}.id as id";
+            }
+
+            /* 查询记录数 */
+            $count = M ( $parent )->join ( "INNER JOIN {$fix}{$name} ON {$fix}{$parent}.id = {$fix}{$name}.id" )->where ( $map )->count ();
+
+            // 查询数据
+            $data = M ( $parent )->join ( "INNER JOIN {$fix}{$name} ON {$fix}{$parent}.id = {$fix}{$name}.id" )->field ( empty ( $fields ) ? true : $fields )->where ( $map )->order ( "{$fix}{$parent}.{$order}" )->page ( $page, $row )->select ();
+        } else {
+            empty ( $fields ) || in_array ( 'id', $fields ) || array_push ( $fields, 'id' );
+            $name = parse_name ( get_table_name ( $model ['id'] ), true );
+            $data = M ( $name )->field ( empty ( $fields ) ? true : $fields )->where ( $map )->order ( $order )->page ( $page, $row )->select ();
+
+            /* 查询记录总数 */
+            $count = M ( $name )->where ( $map )->count ();
+        }
+        $list_data ['list_data'] = $data;
+
+        // 分页
+        if ($count > $row) {
+            $page = new \Think\Page ( $count, $row );
+            $page->setConfig ( 'theme', '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% %HEADER%' );
+            $list_data ['_page'] = $page->show ();
+        }
+        var_dump($list_data);
+        return $list_data;
     }
 
     public function center(){
