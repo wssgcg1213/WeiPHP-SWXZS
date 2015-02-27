@@ -113,11 +113,38 @@ class XwtsController extends AddonsController{
     }
 
     // 通用插件的增加模型
-    public function add($model = null) {
-        is_array ( $model ) || $model = $this->getModel ( 'custom_reply_news' );
-        $templateFile = $this->getAddonTemplate ( $model ['template_add'] );
+    public function add() {
+        $model = $this->getModel ( 'custom_reply_news' );
+        $Model = D ( parse_name ( get_table_name ( $model ['id'] ), 1 ) );
 
-        parent::common_add ( $model, $templateFile );
+        if (IS_POST) {
+            // 获取模型的字段信息
+            $Model = $this->checkAttr ( $Model, $model ['id'] );
+            die(json_encode($Model));
+            if ($Model->create () && $id = $Model->add ()) {
+                $this->_saveKeyword ( $model, $id, 'custom_reply_news' );
+
+                $this->success ( '添加' . $model ['title'] . '成功！', U ( 'lists?model=' . $model ['name'] ) );
+            } else {
+                $this->error ( $Model->getError () );
+            }
+        } else {
+            $fields = get_model_attribute ( $model ['id'] );
+
+            $extra = $this->getCateData ();
+            if (! empty ( $extra )) {
+                foreach ( $fields [1] as &$vo ) {
+                    if ($vo ['name'] == 'cate_id') {
+                        $vo ['extra'] .= "\r\n" . $extra;
+                    }
+                }
+            }
+
+            $this->assign ( 'fields', $fields );
+            $this->meta_title = '新增' . $model ['title'];
+
+            $this->display ();
+        }
     }
 
     // 通用插件的删除模型
