@@ -22,7 +22,7 @@ class WeixinAddonModel extends WeixinModel{
         );
         $typeText = $typeHash[$aim_id];
 
-        $list = M ( 'weisite_category' )->where ( array("title" => $typeText) )->field ( 'id,title' )->find ();
+        $list = M ( 'weisite_category' )->where ( array("title" => $typeText, "token" => $param['token']) )->field ( 'id,title' )->find ();
         $cate_id = $list['id'];
 
         $custom_replys = M('custom_reply_news')->where(array("cate_id" => $cate_id, "token" => $param['token']))->order('sort')->select();
