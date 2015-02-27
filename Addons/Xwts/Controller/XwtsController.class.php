@@ -100,7 +100,7 @@ class XwtsController extends AddonsController{
 
             $this->assign ( 'fields', $fields );
             $this->assign ( 'data', $data );
-            $this->meta_title = '编辑' . $model ['title'];
+//            $this->meta_title = '编辑' . $model ['title'];
 
             $this->display ();
         }
