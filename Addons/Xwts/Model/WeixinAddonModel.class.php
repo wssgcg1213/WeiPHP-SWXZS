@@ -13,7 +13,7 @@ class WeixinAddonModel extends WeixinModel{
         $param ['token'] = get_token ();
         $param ['openid'] = get_openid ();
 
-        $aim_id = $keywordArr['aim_id'] ? $keywordArr['aim_id'] : 4;
+        $aim_id = $keywordArr['aim_id'] ? $keywordArr['aim_id'] : 4; //默认为活动通知
         $typeHash = array(
           "1" => "生物热点资讯",
           "2" => "教师技能培训",
