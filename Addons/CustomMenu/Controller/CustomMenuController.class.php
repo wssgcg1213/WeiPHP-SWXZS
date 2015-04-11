@@ -105,7 +105,7 @@ class CustomMenuController extends AddonsController {
 		curl_close ( $ch1 );
 		$access = json_decode ( $accesstxt, true );
 		if (empty ( $access ['access_token'] )) {
-			$this->error ( '获取access_token失败,请确认AppId和Secret配置是否正确,然后再重试。' );
+			$this->error ( '获取access_token失败,请确认AppId和Secret配置是否正确,然后再重试。'.$accesstxt );
 		}
 		
 		file_get_contents ( 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=' . $access ['access_token'] );
