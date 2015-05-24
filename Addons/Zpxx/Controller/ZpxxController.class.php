@@ -15,10 +15,12 @@ class ZpxxController extends AddonsController{
 		$result = array();
 		foreach ($times[0] as $k => $t) {
             $c = $this->get_content_by_url_id($urls[1][$k]);
+            preg_match("/\d+/", $c['url'], $match);
+            $mobileUrl = "http://job.snnu.edu.cn/wap/index.asp?a=show&t=dw&ID=".$match[0];
             $tmp = array(
 				"time" => $t,
                 "title" => $c['title'],
-				"url" => $c['url']
+				"url" => $mobileUrl
 			);
             if(!$model->where(array("title" => $c['title']))->find()){
                 $model->add($tmp);

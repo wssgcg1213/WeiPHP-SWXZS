@@ -1,0 +1,106 @@
+body {
+  background-color: #DDD;
+}
+nav {
+  overflow: hidden;
+  height: 60px;
+  background-color: #494847;
+  box-shadow: 0 0 20px #a4a4a4;
+}
+nav h3 {
+  margin: 0;
+  line-height: 50px;
+  color: #FFF;
+  padding-left: 30px;
+}
+nav h3 a,
+nav h3 a:hover,
+nav h3 a:link,
+nav h3 a:active {
+  color: #FFF;
+  text-decoration: none;
+}
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fr {
+  float: right;
+  position: relative;
+  top: 14px;
+  right: 20px;
+}
+main li {
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+main li .line {
+  *zoom: 1;
+  margin-bottom: 10px;
+}
+main li .line:before,
+main li .line:after {
+  display: table;
+  content: "";
+}
+main li .line:after {
+  clear: both;
+}
+main li .title {
+  float: left;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8c8684;
+}
+main li .date {
+  float: right;
+}
+main li .content {
+  margin-bottom: 10px;
+}
+.page-content {
+  background-color: #fff;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+}
+.page-content .line {
+  *zoom: 1;
+  margin-bottom: 10px;
+}
+.page-content .line:before,
+.page-content .line:after {
+  display: table;
+  content: "";
+}
+.page-content .line:after {
+  clear: both;
+}
+.page-content .title {
+  float: left;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8c8684;
+}
+.page-content .date {
+  float: right;
+}
+.page-content .content {
+  margin-bottom: 10px;
+}
+.comment {
+  background-color: #fff;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+}
+.comment .ds-meta,
+.comment .ds-service-icon,
+.comment .ds-toolbar,
+.comment .ds-powered-by {
+  display: none!important;
+}
