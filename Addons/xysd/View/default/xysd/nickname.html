@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学院树洞</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Public/style.css"/>
+    <style type="text/css">
+        .nickname-main{
+            background-color: #FFF;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<nav>
+    <h3>学院树洞</h3>
+</nav>
+
+<main class="nickname-main">
+    <form method="POST" action="{U('verify')}">
+        <div class="form-group">
+            <label for="nickname">请输入昵称: (保存后不可修改)</label>
+            <input type="text" class="form-control" id="nickname" placeholder="请输入树洞昵称" />
+            <input name="openid" type="hidden" value="{$openid}"/>
+        </div>
+        <button type="submit" class="btn btn-info" id="submit">确定</button>
+    </form>
+</main>
+
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+    $('#submit').click(function(){
+        var nickname = $('#nickname').val().trim();
+        if(!nickname){
+            alert("请检查输入!");
+            return false;
+        }
+    });
+</script>
+</body>
+</html>
