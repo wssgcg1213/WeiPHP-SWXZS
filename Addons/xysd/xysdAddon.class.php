@@ -8,18 +8,17 @@ use Common\Controller\Addon;
  * @author Ling
  */
 
-    class xysdAddon extends Addon{
-
-        public $info = array(
-            'name'=>'xysd',
-            'title'=>'学院树洞',
-            'description'=>'学院树洞',
-            'status'=>1,
-            'author'=>'Ling',
-            'version'=>'0.1',
-            'has_adminlist'=>1,
-            'type'=>1         
-        );
+class xysdAddon extends Addon{
+    public $info = array(
+        'name'=>'xysd',
+        'title'=>'学院树洞',
+        'description'=>'学院树洞',
+        'status'=>1,
+        'author'=>'Ling',
+        'version'=>'0.1',
+        'has_adminlist'=>1,
+        'type'=>1
+    );
 
 	public function install() {
 		$install_sql = './Addons/xysd/install.sql';
@@ -28,6 +27,7 @@ use Common\Controller\Addon;
 		}
 		return true;
 	}
+
 	public function uninstall() {
 		$uninstall_sql = './Addons/xysd/uninstall.sql';
 		if (file_exists ( $uninstall_sql )) {
@@ -36,9 +36,8 @@ use Common\Controller\Addon;
 		return true;
 	}
 
-        //实现的weixin钩子方法
-        public function weixin($param){
-
-        }
+    //实现的weixin钩子方法
+    public function weixin($param){
 
     }
+}

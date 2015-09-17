@@ -38,4 +38,3 @@ class WeixinAddonModel extends WeixinModel{
 		return true;
 	}	
 }
-        	
