@@ -20,7 +20,8 @@ class WeixinAddonModel extends WeixinModel{
           "3" => "考研出国贴士",
           "4" => "活动通知"
         );
-        $typeText = $typeHash[$aim_id];
+        $randomNum = rand(1, 4);
+        $typeText = $aim_id == 0 ? $typeHash[$randomNum] : $typeHash[$aim_id];
 
         $list = M ( 'weisite_category' )->where ( array("title" => $typeText, "token" => $param['token']) )->field ( 'id,title' )->find ();
         $cate_id = $list['id'];
