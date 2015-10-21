@@ -18,7 +18,8 @@ class WeixinAddonModel extends WeixinModel{
           "1" => "生物热点资讯",
           "2" => "教师技能培训",
           "3" => "考研出国贴士",
-          "4" => "活动通知"
+          "4" => "活动通知",
+          "5" => "职场就业指南"
         );
         $randomNum = rand(1, 3);
         $typeText = $aim_id == 9 ? $typeHash[$randomNum] : $typeHash[$aim_id];
